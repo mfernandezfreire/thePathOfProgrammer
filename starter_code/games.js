@@ -14,10 +14,9 @@ const game = {
     start() {
         this.reset();
         this.setInterval = setInterval(() => {
-            this.setDimensions();
-            this.drawAll();
-            this.moveAll();
-            //    this.move();
+        this.setDimensions();
+        this.drawAll();
+        this.moveAll();
         }, 1000 / 60);
     },
 
@@ -29,16 +28,20 @@ const game = {
     reset(){
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx);
+        this.obstacle = new Obstacle(this.ctx);
     },
 
     drawAll(){
         this.background.draw();
         this.player.draw();
+        // this.obstable.draw();
+
     },
 
     moveAll(){
         this.player.move();
-    }
+    },
+
 
     
     // Create Obstacles
