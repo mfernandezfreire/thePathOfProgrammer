@@ -4,6 +4,8 @@
 const game = {
     canvas: undefined,
     ctx: undefined,
+    framesCounter: 0,
+    obstacles: [],
     init(){
         this.canvas = document.getElementById("canvas")
         this.ctx = canvas.getContext("2d");
@@ -14,9 +16,15 @@ const game = {
     start() {
         this.reset();
         this.setInterval = setInterval(() => {
-        this.setDimensions();
+        if (this.framesCounter > 5000){
+            this.framesCounter = 0;
+        }
+        this.framesCounter++;
+        this.clear();
         this.drawAll();
         this.moveAll();
+        this.generateObtacles();
+        this.clearObstacles();
         }, 1000 / 60);
     },
 
@@ -28,22 +36,33 @@ const game = {
     reset(){
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx);
-        this.obstacle = new Obstacle(this.ctx);
+        this.obstacle = [];
+    },
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.lineWidth, this.height);
     },
 
     drawAll(){
         this.background.draw();
         this.player.draw();
-        // this.obstable.draw();
+        this.obstacles.forEach(obs => obs.draw());
 
     },
 
     moveAll(){
         this.player.move();
+        this.obstacles.forEach(obs => obs.move);
     },
 
+    generateObtacles(){
+        if(this.framesCounter % 90 == 0){
+            this.obstacles.push(this.ctx, new Obstacle(Math.floor(Math.random()*601)));
+            console.log(this.obstacles);
+        }
+    },
 
-    
-    // Create Obstacles
-    // drawObstacles
+    clearObstacles(){
+        this.obstacles = this.obstacles.filter(obs => obs.posy >= 600);
+        }
 };
