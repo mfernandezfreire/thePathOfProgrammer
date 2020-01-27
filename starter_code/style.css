@@ -1,30 +1,40 @@
 body {
   padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-image: url('./images/Background.jpg');
+  background-size: cover;
+  align-items: center;
   text-align: center;
 }
 
-.game-intro {
-  float: left;
-  padding: 0% 10%;
+#game-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 60%;
+  margin-left: 300px;
 }
 
-.game-intro p {
+/* .game-intro p {
   font-size: 18px;
   font-family: "Verdana"
-}
+} */
 
 .logo-img {
-  width: 350px;
+  width: 60%;
 }
 
 .arrows-img {
-  width: 300px;
+  width: 30%;
 }
 
 body button {
   font-size: 30px;
-  background-color: #870007;
-  color: #fff;
+  background-color: #e5007e;
+  color: "white";
   padding: 20px 40px;
   border: 0;
   box-shadow: 0;
@@ -33,6 +43,7 @@ body button {
 }
 
 #game-board {
-    float: left;
-    padding: 20px 0px;
+    display:flex;
+    flex-direction: column;
+    margin-top: 50px;
 }

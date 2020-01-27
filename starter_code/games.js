@@ -56,10 +56,8 @@ const game = {
     },
 
     generateObtacles(){
-        if(this.framesCounter % 90 == 0){
-            this.obstacles.push(this.ctx, new Obstacle(Math.floor(Math.random()*601)));
+            this.obstacles.push(new Obstacle());
             console.log(this.obstacles);
-        }
     },
 
     clearObstacles(){

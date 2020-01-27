@@ -1,8 +1,9 @@
 window.onload = function() {
   document.getElementById("start-button").onclick = function() {
-    startGame();
+  startGame();
   };
   function startGame() {
+      document.querySelector("div").style.display = "none"
       game.init();
   }
 };
