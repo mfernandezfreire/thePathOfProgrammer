@@ -113,8 +113,8 @@ const game = {
 
 
     clearCode() {
-        this.code = this.code.filter(obs => obs.posY < 850);
-        this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 850);
+        this.code = this.code.filter(obs => obs.posY < 825);
+        this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 825);
     }
 
    
