@@ -5,7 +5,10 @@ const game = {
     canvas: undefined,
     ctx: undefined,
     framesCounter: 0,
-    obstacles: [],
+    code: [],
+    lessFrustation: [],
+    
+
     init(){
         this.canvas = document.getElementById("canvas")
         this.ctx = canvas.getContext("2d");
@@ -20,12 +23,14 @@ const game = {
             this.framesCounter = 0;
         }
         this.framesCounter++;
+        // console.log(this.framesCounter);
         this.clear();
         this.drawAll();
         this.moveAll();
-        this.generateObtacles();
-        this.clearObstacles();
+        this.generateCode();
+        this.generateLessFrustration();
         }, 1000 / 60);
+        
     },
 
     setDimensions (){
@@ -36,7 +41,7 @@ const game = {
     reset(){
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx);
-        this.obstacle = [];
+        this.code = [];
     },
 
     clear() {
@@ -46,21 +51,29 @@ const game = {
     drawAll(){
         this.background.draw();
         this.player.draw();
-        this.obstacles.forEach(obs => obs.draw());
-
+        this.code.forEach(code => code.draw());
+        this.lessFrustation.forEach(frus => frus.draw());
     },
 
     moveAll(){
         this.player.move();
-        this.obstacles.forEach(obs => obs.move);
+        this.code.forEach(code => code.move());
+        this.lessFrustation.forEach(frus => frus.move());
     },
 
-    generateObtacles(){
-            this.obstacles.push(new Obstacle());
-            console.log(this.obstacles);
-    },
-
-    clearObstacles(){
-        this.obstacles = this.obstacles.filter(obs => obs.posy >= 600);
+    generateCode(){
+        if(this.framesCounter % 150 == 0){
+            this.code.push(new Code(this.ctx, Math.floor(Math.random()*1000)));
+            console.log(this.code);
         }
+    },
+
+    generateLessFrustration() {
+        if(this.framesCounter % 170  == 0){
+            this.lessFrustation.push(new Lessfrustration(this.ctx, Math.floor(Math.random()*1000)));
+        }
+
+    }
+
+   
 };
