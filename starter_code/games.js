@@ -5,6 +5,8 @@ const game = {
     canvas: undefined,
     ctx: undefined,
     framesCounter: 0,
+    knowledge: 0,
+    frustration: 500,
     code: [],
     lessFrustration: [],
     
@@ -13,6 +15,7 @@ const game = {
         this.canvas = document.getElementById("canvas")
         this.ctx = canvas.getContext("2d");
         this.setDimensions();
+        // knowledgeboard.init(this.ctx);
         this.start();
     },
 
@@ -65,14 +68,14 @@ const game = {
 
     generateCode(){
         if(this.framesCounter % 150 == 0){
-            this.code.push(new Code(this.ctx, Math.floor(Math.random()*1000)));
+            this.code.push(new Code(this.ctx, Math.floor(Math.random()*901)));
             console.log(this.code);
         }
     },
 
     generateLessFrustration() {
         if(this.framesCounter % 170  == 0){
-            this.lessFrustration.push(new Lessfrustration(this.ctx, Math.floor(Math.random()*1000)));
+            this.lessFrustration.push(new Lessfrustration(this.ctx, Math.floor(Math.random()*901)));
         }
 
     },
@@ -80,8 +83,9 @@ const game = {
     isCodeCollision() {
         return this.code.some(obs => {
           if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
-            console.log("golpeado");
-          }
+            this.knowledge += 10;
+            console.log(this.knowledge);
+          } 
         }
           );
   
@@ -90,7 +94,8 @@ const game = {
       isFrustrationCollision() {
         return this.lessFrustration.some(obs => {
           if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
-            console.log("golpeado");
+            this.frustration += 10;
+            console.log(this.frustration);
           }
         }
           );
@@ -100,7 +105,6 @@ const game = {
     clearCode() {
         this.code = this.code.filter(obs => obs.posY < 800);
         this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 800);
-        
     }
 
    

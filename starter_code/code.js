@@ -8,7 +8,7 @@ class Code {
 
         this.image = new Image();
         this.image.src = "./images/html5.png";
-        this.velY = 5;
+        this.velY = Math.floor(Math.random()*6)+1;
     }
     draw(){ 
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
