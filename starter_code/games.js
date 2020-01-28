@@ -6,7 +6,7 @@ const game = {
     ctx: undefined,
     framesCounter: 0,
     code: [],
-    lessFrustation: [],
+    lessFrustration: [],
     
 
     init(){
@@ -24,11 +24,13 @@ const game = {
         }
         this.framesCounter++;
         // console.log(this.framesCounter);
-        this.clear();
         this.drawAll();
         this.moveAll();
         this.generateCode();
+        this.clearCode();
         this.generateLessFrustration();
+        this.isCodeCollision();
+        this.isFrustrationCollision();
         }, 1000 / 60);
         
     },
@@ -52,13 +54,13 @@ const game = {
         this.background.draw();
         this.player.draw();
         this.code.forEach(code => code.draw());
-        this.lessFrustation.forEach(frus => frus.draw());
+        this.lessFrustration.forEach(frus => frus.draw());
     },
 
     moveAll(){
         this.player.move();
         this.code.forEach(code => code.move());
-        this.lessFrustation.forEach(frus => frus.move());
+        this.lessFrustration.forEach(frus => frus.move());
     },
 
     generateCode(){
@@ -70,9 +72,35 @@ const game = {
 
     generateLessFrustration() {
         if(this.framesCounter % 170  == 0){
-            this.lessFrustation.push(new Lessfrustration(this.ctx, Math.floor(Math.random()*1000)));
+            this.lessFrustration.push(new Lessfrustration(this.ctx, Math.floor(Math.random()*1000)));
         }
 
+    },
+
+    isCodeCollision() {
+        return this.code.some(obs => {
+          if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
+            console.log("golpeado");
+          }
+        }
+          );
+  
+      },
+
+      isFrustrationCollision() {
+        return this.lessFrustration.some(obs => {
+          if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
+            console.log("golpeado");
+          }
+        }
+          );
+  
+      },
+
+    clearCode() {
+        this.code = this.code.filter(obs => obs.posY < 800);
+        this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 800);
+        
     }
 
    
