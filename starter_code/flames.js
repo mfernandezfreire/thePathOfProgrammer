@@ -9,7 +9,7 @@ class Flames {
         this.image = new Image();
         this.image.src = "./images/PixelArt copia.png";
     }
-    draw(){ 
+    draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 };

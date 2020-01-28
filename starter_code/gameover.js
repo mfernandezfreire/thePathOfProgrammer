@@ -1,4 +1,4 @@
-class Background {
+class gameover {
     constructor(ctx) {
         this.ctx = ctx;
         this.width = 1000;
@@ -7,7 +7,7 @@ class Background {
         this.posY = 0;
 
         this.image = new Image();
-        this.image.src = "./images/90s_programmer_room__link_in_description__by_mattartistjeevas_dccrk3v-pre_2.jpg";
+        this.image.src = "./images/GameOver1-1.png";
     }
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);

@@ -8,13 +8,13 @@ class Code {
 
         this.image = new Image();
         this.image.src = "./images/html5.png";
-        this.velY = Math.floor(Math.random()*6)+1;
+        this.velY = Math.floor(Math.random() * 6) + 1;
     }
-    draw(){ 
+    draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
 
-        move() {
-            this.posY += this.velY;
-        }
+    move() {
+        this.posY += this.velY;
+    }
 }
