@@ -3,8 +3,8 @@ class Player {
         this.ctx = ctx;
         this.width = 100;
         this.height = 100;
-        this.posX = 500;
-        this.posY = 750;
+        this.posX = 450;
+        this.posY = 650;
     
 
         this.image = new Image();

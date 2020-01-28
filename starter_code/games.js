@@ -6,7 +6,7 @@ const game = {
     ctx: undefined,
     framesCounter: 0,
     knowledge: 0,
-    frustration: 500,
+    resilience: 500,
     code: [],
     lessFrustration: [],
     
@@ -33,6 +33,7 @@ const game = {
         this.clearCode();
         this.generateLessFrustration();
         this.isCodeCollision();
+        this.isCodeLose();
         this.isFrustrationCollision();
         }, 1000 / 60);
         
@@ -84,27 +85,36 @@ const game = {
         return this.code.some(obs => {
           if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
             this.knowledge += 10;
-            console.log(this.knowledge);
           } 
         }
           );
   
       },
 
-      isFrustrationCollision() {
-        return this.lessFrustration.some(obs => {
-          if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
-            this.frustration += 10;
-            console.log(this.frustration);
-          }
-        }
-          );
-  
+      isCodeLose() {
+          return this.code.forEach (obs => {
+            if(obs.posY > 800){
+                this.resilience -= 10;
+                this.flames = new Flames(this.ctx, obs.posX);
+                this.flames.draw();
+            }
+          });
       },
 
+    isFrustrationCollision() {
+        return this.lessFrustration.some(obs => {
+          if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
+            this.resilience += 10;
+          } 
+        }
+          );
+      },
+
+
+
     clearCode() {
-        this.code = this.code.filter(obs => obs.posY < 800);
-        this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 800);
+        this.code = this.code.filter(obs => obs.posY < 850);
+        this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 850);
     }
 
    
