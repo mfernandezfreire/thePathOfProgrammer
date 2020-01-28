@@ -28,6 +28,6 @@ class Player {
              if (e.keyCode === 40) {
                 this.posY += 20;
              } 
-        };
-    }
+    };
+}
 }

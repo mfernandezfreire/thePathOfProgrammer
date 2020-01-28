@@ -15,7 +15,6 @@ const game = {
         this.canvas = document.getElementById("canvas")
         this.ctx = canvas.getContext("2d");
         this.setDimensions();
-        // knowledgeboard.init(this.ctx);
         this.start();
     },
 
@@ -26,7 +25,6 @@ const game = {
             this.framesCounter = 0;
         }
         this.framesCounter++;
-        // console.log(this.framesCounter);
         this.drawAll();
         this.moveAll();
         this.generateCode();
@@ -46,6 +44,8 @@ const game = {
 
     reset(){
         this.background = new Background(this.ctx);
+        this.knowledgeboard = new Knowledgeboard(this.ctx);
+        this.resilienceboard = new Resilienceboard(this.ctx);
         this.player = new Player(this.ctx);
         this.code = [];
     },
@@ -56,6 +56,8 @@ const game = {
 
     drawAll(){
         this.background.draw();
+        this.knowledgeboard.draw(this.knowledge);
+        this.resilienceboard.draw(this.resilience)
         this.player.draw();
         this.code.forEach(code => code.draw());
         this.lessFrustration.forEach(frus => frus.draw());
@@ -84,7 +86,8 @@ const game = {
     isCodeCollision() {
         return this.code.some(obs => {
           if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
-            this.knowledge += 10;
+            this.knowledge += 0.5;
+            
           } 
         }
           );
@@ -94,7 +97,8 @@ const game = {
       isCodeLose() {
           return this.code.forEach (obs => {
             if(obs.posY > 800){
-                this.resilience -= 10;
+                this.resilience -= 1;
+                console.log(this.resilience)
                 this.flames = new Flames(this.ctx, obs.posX);
                 this.flames.draw();
             }
@@ -104,7 +108,7 @@ const game = {
     isFrustrationCollision() {
         return this.lessFrustration.some(obs => {
           if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ) {
-            this.resilience += 10;
+            this.resilience += 1;
           } 
         }
           );
