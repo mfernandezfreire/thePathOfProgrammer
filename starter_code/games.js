@@ -100,10 +100,18 @@ const game = {
                 };
                 let posX = obs.posX;
                 let posY = obs.posY;
-                this.code = this.code.filter(obs => obs.posX !== posX && obs.posY !== posY);
-                console.log(posX)
-                console.log(posY)
-            }
+
+                this.boom = new Boom(this.ctx,posX, posY);
+                console.log(this.boom);
+                this.boom.draw();
+                
+                
+                setTimeout(() => {
+                    this.code = this.code.filter(obs => obs.posX !== posX && obs.posY !== posY);
+                    console.log(posX)
+                    console.log(posY)
+                }, 600);
+                }
         });
 
     },
