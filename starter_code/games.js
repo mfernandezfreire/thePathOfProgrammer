@@ -88,7 +88,9 @@ const game = {
     isCodeCollision() {
         return this.code.some(obs => {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
-                this.knowledge += 0.30;
+                if(this.knowledge < 500){
+                  this.knowledge += 30;
+                };
                 let posX = obs.posX;
                 let posY = obs.posY;
                 this.code = this.code.filter(obs => obs.posX !== posX && obs.posY !== posY);
@@ -112,7 +114,9 @@ const game = {
     isFrustrationCollision() {
         return this.lessFrustration.some(obs => {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
+                if (this.resilience < 500) {
                 this.resilience += 30;
+                }
                 let posX = obs.posX;
                 let posY = obs.posY;
                 this.lessFrustration = this.lessFrustration.filter(obs => obs.posX !== posX && obs.posY !== posY);
