@@ -8,7 +8,7 @@ class Lessfrustration {
 
         this.velY = Math.floor(Math.random() * 6) + 1;
 
-        this.imageSource = ["./images/kisspng-pizza-hut-pixel-art-pizzaria-heart-pizza-5b46df4de0aca3.0224434515313713419203.png", "./images/coffee-transparent-tumblr-17.png", "./images/PikPng.com_google-logo-png_607449.png", "./images/PixelArt.png"]
+        this.imageSource = ["./images/kisspng-pizza-hut-pixel-art-pizzaria-heart-pizza-5b46df4de0aca3.0224434515313713419203.png", "./images/teacup.png", "./images/guitar.png", "./images/bicicle.png",];
 
         this.image = new Image();
         this.image.src = this.imageSource[Math.floor(Math.random() * 4)];

@@ -10,6 +10,12 @@ const game = {
         code: [],
         lessFrustration: [],
         newupdate: [],
+        keys: {
+            RIGTH: 39,
+            LEFT: 37,
+            UP: 38,
+            DOWN: 40
+        },
 
 
         init() {
@@ -58,7 +64,7 @@ const game = {
             this.background = new Background(this.ctx);
             this.knowledgeboard = new Knowledgeboard(this.ctx);
             this.resilienceboard = new Resilienceboard(this.ctx);
-            this.player = new Player(this.ctx);
+            this.player = new Player(this.ctx, this.keys);
             this.code = [];
             this.newupdate = [];
             this.gameoverlogo = new Gameoverlogo(this.ctx);
@@ -80,7 +86,7 @@ const game = {
         },
 
         moveAll() {
-            this.player.move();
+            // this.player.move();
             this.code.forEach(code => code.move());
             this.lessFrustration.forEach(frus => frus.move());
             this.newupdate.forEach(upd => upd.move());
