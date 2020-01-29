@@ -3,7 +3,7 @@ window.onload = function() {
   startGame();
   };
   function startGame() {
-      document.querySelector("div").style.display = "none"
+      document.querySelector("div").style.display = "none";
       game.init();
   }
 };

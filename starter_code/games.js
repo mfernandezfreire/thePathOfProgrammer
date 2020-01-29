@@ -32,10 +32,15 @@ const game = {
             this.generateLessFrustration();
             this.isCodeCollision();
             this.isCodeLose();
+            this.isLessFrustration();
             this.isFrustrationCollision();
             if (this.resilience <= 0) {
                 this.gameOver();
             }
+            if (this.knowledge > 500){
+                this.nextLevel();
+            }
+
         }, 1000 / 60);
 
     },
@@ -51,6 +56,8 @@ const game = {
         this.resilienceboard = new Resilienceboard(this.ctx);
         this.player = new Player(this.ctx);
         this.code = [];
+        this.gameoverlogo = new Gameoverlogo(this.ctx);
+        this.nextlevellogo = new Nextlevellogo(this.ctx);
     },
 
     clear() {
@@ -110,6 +117,15 @@ const game = {
             }
         });
     },
+    isLessFrustration() {
+        return this.lessFrustration.forEach(obs => {
+            if (obs.posY > 800) {
+                this.resilience -= 15;
+                this.flames = new Poof(this.ctx, obs.posX);
+                this.flames.draw();
+            }
+        });
+    },
 
     isFrustrationCollision() {
         return this.lessFrustration.some(obs => {
@@ -131,6 +147,11 @@ const game = {
 
     gameOver() {
         clearInterval(this.setInterval);
+        this.gameoverlogo.draw();
+    },
+    nextLevel() {
+        clearInterval(this.setInterval);
+        this.nextlevellogo.draw();
     }
 
 
