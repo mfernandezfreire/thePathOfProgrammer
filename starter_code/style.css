@@ -15,19 +15,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   width: 60%;
-  margin-left: 300px;
+  margin-left: 600px;
 }
 
-/* .game-intro p {
-  font-size: 18px;
-  font-family: "Verdana"
-} */
+#instruction {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-left: 500px;;
+
+}
+
+instruction-image {
+  width: 100px;
+  height: 800px;
+}
 
 .logo-img {
-  width: 60%;
+  width: 100%;
 }
+
+
 
 .arrows-img {
   width: 30%;
@@ -47,5 +62,8 @@ body button {
 #game-board {
   display: flex;
   flex-direction: column;
+  align-items: center;;
+  width: 1000px;
+  height: 900px;
   margin-top: 50px;
 }

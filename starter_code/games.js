@@ -169,9 +169,9 @@ const game = {
                 let posX = obs.posX;
                 let posY = obs.posY;
 
-                this.boom = new Boom(this.ctx, posX, posY);
+                this.kaboom = new Kaboom(this.ctx, posX, posY);
                 console.log(this.boom);
-                this.boom.draw();
+                this.kaboom.draw();
 
 
                 setTimeout(() => {
@@ -228,7 +228,7 @@ const game = {
     clear() {
         this.code = this.code.filter(obs => obs.posY < 825);
         this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 825);
-        // this.newupdate = this.newupdate.filter(upd => upd.posX < 1100);
+        // this.newupdate = this.newupdate.filter(upd => upd.posX > 2100);
 
     },
 
