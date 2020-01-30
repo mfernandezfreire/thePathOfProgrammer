@@ -3,7 +3,7 @@ class Newupdate {
         this.ctx = ctx;
         this.width = 350;
         this.height = 350;
-        this.posX = 850;
+        this.posX = 1700;
         this.posY = 550;
 
         this.image = new Image();

@@ -1,13 +1,13 @@
 class Warning {
     constructor(ctx) {
         this.ctx = ctx;
-        this.width = 200;
-        this.height = 200;
+        this.width = 350;
+        this.height = 250;
         this.posX = 850;
-        this.posY = 100;
+        this.posY = 150;
 
         this.image = new Image();
-        this.image.src = "./images/newhtml.png";
+        this.image.src = "./images/Warning.png";
         this.velX = 1;
     }
     draw() {
