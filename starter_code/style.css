@@ -33,6 +33,16 @@ body {
 
 }
 
+#game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1000px;
+  height: 900px;
+  margin-top: 50px;
+  /* margin-left: 100px; */
+}
+
 #game-win {
   display: none;
   flex-direction: column;
@@ -41,18 +51,10 @@ body {
   text-align: center;
   width: 60%;
   height: 100%;
-  margin-left: 500px;;
-
-}
-
-#game-board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;;
-  width: 1000px;
-  height: 900px;
   margin-top: 50px;
 }
+
+
 
 #game-lose {
   display: none;
@@ -62,8 +64,7 @@ body {
   text-align: center;
   width: 60%;
   height: 100%;
-  margin-left: 500px;;
-
+  margin-top: 50px;
 }
 
 instruction-image {

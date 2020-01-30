@@ -5,7 +5,7 @@ const game = {
     canvas: undefined,
     ctx: undefined,
     framesCounter: 0,
-    knowledge: 490,
+    knowledge: 0,
     resilience: 500,
     code: [],
     lessFrustration: [],
@@ -71,6 +71,7 @@ const game = {
         this.soundWin = new Sound("./sounds/270333__littlerobotsoundfactory__jingle-win-00.wav")
         this.soundLose = new Sound("./sounds/270329__littlerobotsoundfactory__jingle-lose-00.wav")
         this.soundMenuPick = new Sound("./sounds/270322__littlerobotsoundfactory__menu-navigate-02.wav")
+        this.soundMegaLose = new Sound("./sounds/270311__littlerobotsoundfactory__explosion-03.wav")
         this.background = new Background(this.ctx);
         this.knowledgeboard = new Knowledgeboard(this.ctx);
         this.resilienceboard = new Resilienceboard(this.ctx);
@@ -167,9 +168,13 @@ const game = {
     isupdateplayercollision() {
         return this.newupdate.some(obs => {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
-                if (this.knowledge < 500) {
+                if (this.knowledge > 0) {
                     this.knowledge -= 100;
-                };
+                } else {
+                    this.knowledge = 0;
+                }
+
+                this.soundMegaLose.play();
 
                 let posX = obs.posX;
                 let posY = obs.posY;
@@ -190,6 +195,7 @@ const game = {
         return this.code.forEach(obs => {
             if (obs.posY > 800) {
                 this.resilience -= 10;
+                this.soundBlameIt.play();
                 this.flames = new Flames(this.ctx, obs.posX);
                 this.flames.draw();
             }
@@ -200,6 +206,7 @@ const game = {
             if (obs.posY > 800) {
                 this.flames = new Poof(this.ctx, obs.posX);
                 this.flames.draw();
+                this.soundBlameIt.play();
             }
         });
     },
@@ -238,6 +245,9 @@ const game = {
         clearInterval(this.setInterval);
         this.soundGamePlay.pause();
         this.soundLose.play();
+        this.resilience = 500;
+        this.knowledge = 0;
+
         document.getElementById("game-board").style.display = "none";
         document.getElementById("game-lose").style.display = "flex";
     },
