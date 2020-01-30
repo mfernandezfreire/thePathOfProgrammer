@@ -143,9 +143,8 @@ const game = {
     isCodeCollision() {
         return this.code.some(obs => {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
-                if (this.knowledge < 500) {
                     this.knowledge += 2;
-                };
+                
 
                 this.soundGotIt.play();
 
@@ -243,13 +242,13 @@ const game = {
         document.getElementById("game-lose").style.display = "flex";
     },
 
-    // nextLevel() {
-    //     clearInterval(this.setInterval);
-    //     this.soundGamePlay.pause();
-    //     this.soundWin.play();
-    //     document.getElementById("game-board").style.display = "none";
-    //     document.getElementById("game-win").style.display = "flex";
-    // }
+    nextLevel() {
+        clearInterval(this.setInterval);
+        this.soundGamePlay.pause();
+        this.soundWin.play();
+        document.getElementById("game-board").style.display = "none";
+        document.getElementById("game-win").style.display = "flex";
+    }
 
 
 };
