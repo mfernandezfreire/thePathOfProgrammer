@@ -22,22 +22,22 @@ class Player {
         document.addEventListener("keydown", e => {
             switch (e.keyCode) {
                 case this.keys.RIGTH:
-                    if (this.posX < 900) {
+                    if (this.posX < 800) {
                         this.posX += 20;
                     }
                     break;
                 case this.keys.LEFT:
-                    if (this.posX > 0) {
+                    if (this.posX > 100) {
                         this.posX -= 20;
                     }
                     break;
                 case this.keys.UP:
-                    if (this.posY > 0) {
+                    if (this.posY > 300) {
                         this.posY -= 20;
                     }
                     break;
                 case this.keys.DOWN:
-                    if (this.posY < 800) {
+                    if (this.posY < 700) {
                         this.posY += 20;
                     }
                     break;
