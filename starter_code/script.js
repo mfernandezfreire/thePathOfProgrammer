@@ -5,6 +5,9 @@ window.onload = function() {
   document.getElementById("game-start").onclick = function() {
     startGame();
     };
+  document.getElementById("restart").onclick = function() {
+      startGame();
+    };
 
   function instruction() {
     document.getElementById("game-intro").style.display = "none";

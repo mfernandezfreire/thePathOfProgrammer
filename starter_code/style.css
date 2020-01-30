@@ -33,6 +33,39 @@ body {
 
 }
 
+#game-win {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-left: 500px;;
+
+}
+
+#game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;;
+  width: 1000px;
+  height: 900px;
+  margin-top: 50px;
+}
+
+#game-lose {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-left: 500px;;
+
+}
+
 instruction-image {
   width: 100px;
   height: 800px;
@@ -59,11 +92,3 @@ body button {
   margin-bottom: 20px;
 }
 
-#game-board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;;
-  width: 1000px;
-  height: 900px;
-  margin-top: 50px;
-}

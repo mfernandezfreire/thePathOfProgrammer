@@ -23,7 +23,7 @@ class Player {
             yoyo: 1,
             repeat: -1,
             w: this.width * .85,
-            h: this.height * .85
+            h: this.height * .8522
         })
     }
     draw() {

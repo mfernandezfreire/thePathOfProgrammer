@@ -5,7 +5,7 @@ const game = {
     canvas: undefined,
     ctx: undefined,
     framesCounter: 0,
-    knowledge: 0,
+    knowledge: 490,
     resilience: 500,
     code: [],
     lessFrustration: [],
@@ -24,6 +24,7 @@ const game = {
         this.ctx = canvas.getContext("2d");
         this.setDimensions();
         this.start();
+        
     },
 
     start() {
@@ -32,6 +33,7 @@ const game = {
             if (this.framesCounter > 5000) {
                 this.framesCounter = 0;
             }
+            this.soundGamePlay.play();
             this.framesCounter++;
             this.drawAll();
             this.moveAll();
@@ -63,6 +65,12 @@ const game = {
     },
 
     reset() {
+        this.soundGamePlay = new Sound("./sounds/spanish-flea-8-bit (1).mp3")
+        this.soundGotIt = new Sound("./sounds/270303__littlerobotsoundfactory__collect-point-01.wav")
+        this.soundBlameIt = new Sound("./sounds/270343__littlerobotsoundfactory__shoot-01.wav")
+        this.soundWin = new Sound("./sounds/270333__littlerobotsoundfactory__jingle-win-00.wav")
+        this.soundLose = new Sound("./sounds/270329__littlerobotsoundfactory__jingle-lose-00.wav")
+        this.soundMenuPick = new Sound("./sounds/270322__littlerobotsoundfactory__menu-navigate-02.wav")
         this.background = new Background(this.ctx);
         this.knowledgeboard = new Knowledgeboard(this.ctx);
         this.resilienceboard = new Resilienceboard(this.ctx);
@@ -120,7 +128,6 @@ const game = {
     generateWarning(){
         if (this.framesCounter % 1800 == 0) {
             this.warning.push(new Warning(this.ctx));
-            console.log(this.warning);
         }
     },
 
@@ -138,14 +145,14 @@ const game = {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
                 if (this.knowledge < 500) {
                     this.knowledge += 2;
-                    console.log(this.knowledge)
                 };
+
+                this.soundGotIt.play();
 
                 let posX = obs.posX;
                 let posY = obs.posY;
 
                 this.boom = new Boom(this.ctx, posX, posY);
-                console.log(this.boom);
                 this.boom.draw();
 
 
@@ -162,22 +169,18 @@ const game = {
         return this.newupdate.some(obs => {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
                 if (this.knowledge < 500) {
-                    this.knowledge -= 2;
-                    console.log(this.knowledge);
+                    this.knowledge -= 100;
                 };
 
                 let posX = obs.posX;
                 let posY = obs.posY;
 
                 this.kaboom = new Kaboom(this.ctx, posX, posY);
-                console.log(this.boom);
                 this.kaboom.draw();
 
 
                 setTimeout(() => {
                     this.newupdate = this.newupdate.filter(obs => obs.posX !== posX && obs.posY !== posY);
-                    console.log(posX)
-                    console.log(posY)
                 }, 100);
             }
         });
@@ -207,19 +210,19 @@ const game = {
             if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
                 if (this.resilience < 500) {
                     this.resilience += 10;
+                    
                 }
                 let posX = obs.posX;
                 let posY = obs.posY;
 
+                this.soundGotIt.play();
+                
                 this.boom = new Resilence(this.ctx, posX, posY);
-                console.log(this.resilence);
                 this.boom.draw();
 
 
                 setTimeout(() => {
                     this.lessFrustration = this.lessFrustration.filter(obs => obs.posX !== posX && obs.posY !== posY);
-                    console.log(posX)
-                    console.log(posY)
                 }, 300);
             }
         });
@@ -234,13 +237,19 @@ const game = {
 
     gameOver() {
         clearInterval(this.setInterval);
-        this.gameoverlogo.draw();
+        this.soundGamePlay.pause();
+        this.soundLose.play();
+        document.getElementById("game-board").style.display = "none";
+        document.getElementById("game-lose").style.display = "flex";
     },
 
-    nextLevel() {
-        clearInterval(this.setInterval);
-        this.nextlevellogo.draw();
-    }
+    // nextLevel() {
+    //     clearInterval(this.setInterval);
+    //     this.soundGamePlay.pause();
+    //     this.soundWin.play();
+    //     document.getElementById("game-board").style.display = "none";
+    //     document.getElementById("game-win").style.display = "flex";
+    // }
 
 
 };
