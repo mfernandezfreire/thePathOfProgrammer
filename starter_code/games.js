@@ -11,7 +11,9 @@ const game = {
     code2: [],
     lessFrustration: [],
     newupdate: [],
+    newupdate2: [],
     warning: [],
+    warning2: [],
     keys: {
         RIGTH: 39,
         LEFT: 37,
@@ -81,10 +83,10 @@ const game = {
             this.generateCode2();
             this.clear2();
             this.generateLessFrustration();
-            this.generateNewUpdate();
-            this.generateWarning();
-            this.isupdateplayercollision();
-            this.isWarningAdvice();
+            this.generateNewUpdate2();
+            this.generateWarning2();
+            this.isupdateplayercollision2();
+            this.isWarningAdvice2();
             this.isCodeCollision2();
             this.isCodeLose2();
             this.isLessFrustration();
@@ -123,7 +125,9 @@ const game = {
         this.code = [];
         this.code2 = [];
         this.newupdate = [];
+        this.newupdate2 = [];
         this.warning = [];
+        this.warning2 = [];
         this.gameoverlogo = new Gameoverlogo(this.ctx);
         this.nextlevellogo = new Nextlevellogo(this.ctx);
     },
@@ -153,8 +157,8 @@ const game = {
         this.player.draw();
         this.code2.forEach(code => code.draw());
         this.lessFrustration.forEach(frus => frus.draw());
-        this.newupdate.forEach(upd => upd.draw());
-        this.warning.forEach(upd => upd.draw());
+        this.newupdate2.forEach(upd => upd.draw());
+        this.warning2.forEach(upd => upd.draw());
 
     },
 
@@ -169,8 +173,8 @@ const game = {
     moveAll2() {
         this.code2.forEach(code => code.move());
         this.lessFrustration.forEach(frus => frus.move());
-        this.newupdate.forEach(upd => upd.move());
-        this.warning.forEach(upd => upd.move());
+        this.newupdate2.forEach(upd => upd.move());
+        this.warning2.forEach(upd => upd.move());
 
     },
 
@@ -198,16 +202,33 @@ const game = {
             this.newupdate.push(new Newupdate(this.ctx));
         }
     },
+    generateNewUpdate2() {
+        if (this.framesCounter % 2000 == 0) {
+            this.newupdate2.push(new Newupdate2(this.ctx));
+        }
+    },
     generateWarning(){
         if (this.framesCounter % 1800 == 0) {
             this.warning.push(new Warning(this.ctx));
         }
     },
-
+    generateWarning2(){
+        if (this.framesCounter % 1800 == 0) {
+            this.warning2.push(new Warning2(this.ctx));
+        }
+    },
     isWarningAdvice() {
         return this.newupdate.some(obs => {
             if (this.background.posX + this.background.width > obs.posX && obs.posX + obs.width > this.background.posX && this.background.posY + this.background.height > obs.posY && obs.posY + obs.height > this.background.posY) {
                 this.warning = [];
+            }
+        });
+
+    },
+    isWarningAdvice2() {
+        return this.newupdate2.some(obs => {
+            if (this.background.posX + this.background.width > obs.posX && obs.posX + obs.width > this.background.posX && this.background.posY + this.background.height > obs.posY && obs.posY + obs.height > this.background.posY) {
+                this.warning2 = [];
             }
         });
 
@@ -226,6 +247,7 @@ const game = {
 
                 this.boom = new Boom(this.ctx, posX, posY);
                 this.boom.draw();
+                
 
 
                 setTimeout(() => {
@@ -278,6 +300,31 @@ const game = {
 
                 setTimeout(() => {
                     this.newupdate = this.newupdate.filter(obs => obs.posX !== posX && obs.posY !== posY);
+                }, 100);
+            }
+        });
+
+    },
+    isupdateplayercollision2() {
+        return this.newupdate2.some(obs => {
+            if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
+                if (this.knowledge > 0) {
+                    this.knowledge -= 100;
+                } else {
+                    this.knowledge = 0;
+                }
+
+                this.soundMegaLose.play();
+
+                let posX = obs.posX;
+                let posY = obs.posY;
+
+                this.kaboom = new Kaboom(this.ctx, posX, posY);
+                this.kaboom.draw();
+
+
+                setTimeout(() => {
+                    this.newupdate2 = this.newupdate2.filter(obs => obs.posX !== posX && obs.posY !== posY);
                 }, 100);
             }
         });

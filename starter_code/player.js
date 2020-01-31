@@ -6,10 +6,9 @@ class Player {
         this.posX = 450;
         this.posY = 650;
         this.vel = -20 + knowledge*0.01 - resilience*0.01;
-
         this.brainDimensions = {
-            w: this.width,
-            h: this.height
+            w: this.width ,
+            h: this.height ,
         }
 
 
@@ -27,9 +26,13 @@ class Player {
             h: this.height * .8522
         })
     }
+
+    
+
     draw() {
         this.ctx.drawImage(this.image, this.posX, this.posY, this.brainDimensions.w, this.brainDimensions.h);
     }
+
 
     setListeners() {
         document.addEventListener("keydown", e => {
