@@ -1,10 +1,11 @@
 class Player {
-    constructor(ctx, keys) {
+    constructor(ctx, keys, knowledge, resilience) {
         this.ctx = ctx;
-        this.width = 100;
-        this.height = 100;
+        this.width = 100 + knowledge*0.3;
+        this.height = 100 + knowledge*0.3;
         this.posX = 450;
         this.posY = 650;
+        this.vel = -20 + knowledge*0.01 - resilience*0.01;
 
         this.brainDimensions = {
             w: this.width,
@@ -35,22 +36,22 @@ class Player {
             switch (e.keyCode) {
                 case this.keys.RIGTH:
                     if (this.posX < 800) {
-                        this.posX += 20;
+                        this.posX = this.posX - this.vel;
                     }
                     break;
                 case this.keys.LEFT:
                     if (this.posX > 100) {
-                        this.posX -= 20;
+                        this.posX = this.posX + this.vel;
                     }
                     break;
                 case this.keys.UP:
                     if (this.posY > 200) {
-                        this.posY -= 20;
+                        this.posY = this.posY + this.vel;
                     }
                     break;
                 case this.keys.DOWN:
                     if (this.posY < 700) {
-                        this.posY += 20;
+                        this.posY = this.posY - this.vel;
                     }
                     break;
             }

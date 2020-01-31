@@ -5,7 +5,7 @@ const game = {
     canvas: undefined,
     ctx: undefined,
     framesCounter: 0,
-    knowledge: 0,
+    knowledge: 490,
     resilience: 500,
     code: [],
     lessFrustration: [],
@@ -27,6 +27,14 @@ const game = {
         
     },
 
+    init2() {
+        this.canvas = document.getElementById("canvas")
+        this.ctx = canvas.getContext("2d");
+        this.setDimensions();
+        this.start2();
+        
+    },
+
     start() {
         this.reset();
         this.setInterval = setInterval(() => {
@@ -36,6 +44,38 @@ const game = {
             this.soundGamePlay.play();
             this.framesCounter++;
             this.drawAll();
+            this.moveAll();
+            this.generateCode();
+            this.clear();
+            this.generateLessFrustration();
+            this.generateNewUpdate();
+            this.generateWarning();
+            this.isupdateplayercollision();
+            this.isWarningAdvice();
+            this.isCodeCollision();
+            this.isCodeLose();
+            this.isLessFrustration();
+            this.isFrustrationCollision();
+            if (this.resilience <= 0) {
+                this.gameOver();
+            }
+            if (this.knowledge > 500) {
+                this.nextLevel();
+            }
+
+        }, 1000 / 60);
+
+    },
+
+    start2() {
+        this.reset();
+        this.setInterval = setInterval(() => {
+            if (this.framesCounter > 5000) {
+                this.framesCounter = 0;
+            }
+            this.soundGamePlay.play();
+            this.framesCounter++;
+            this.drawAll2();
             this.moveAll();
             this.generateCode();
             this.clear();
@@ -73,9 +113,12 @@ const game = {
         this.soundMenuPick = new Sound("./sounds/270322__littlerobotsoundfactory__menu-navigate-02.wav")
         this.soundMegaLose = new Sound("./sounds/270311__littlerobotsoundfactory__explosion-03.wav")
         this.background = new Background(this.ctx);
+        this.background2 = new Background2(this.ctx);
         this.knowledgeboard = new Knowledgeboard(this.ctx);
+        this.knowledgeboard2 = new Knowledgeboard2(this.ctx);
         this.resilienceboard = new Resilienceboard(this.ctx);
-        this.player = new Player(this.ctx, this.keys);
+        this.resilienceboard2 = new Resilienceboard2(this.ctx);
+        this.player = new Player(this.ctx, this.keys, this.knowledge, this.resilience);
         this.code = [];
         this.newupdate = [];
         this.warning = [];
@@ -90,7 +133,18 @@ const game = {
     drawAll() {
         this.background.draw();
         this.knowledgeboard.draw(this.knowledge);
-        this.resilienceboard.draw(this.resilience)
+        this.resilienceboard.draw(this.resilience);
+        this.player.draw();
+        this.code.forEach(code => code.draw());
+        this.lessFrustration.forEach(frus => frus.draw());
+        this.newupdate.forEach(upd => upd.draw());
+        this.warning.forEach(upd => upd.draw());
+
+    },
+    drawAll2() {
+        this.background2.draw();
+        this.knowledgeboard2.draw(this.knowledge);
+        this.resilienceboard2.draw(this.resilience)
         this.player.draw();
         this.code.forEach(code => code.draw());
         this.lessFrustration.forEach(frus => frus.draw());
@@ -256,6 +310,9 @@ const game = {
         clearInterval(this.setInterval);
         this.soundGamePlay.pause();
         this.soundWin.play();
+        this.resilience = 500;
+        this.knowledge = 0;
+
         document.getElementById("game-board").style.display = "none";
         document.getElementById("game-win").style.display = "flex";
     }

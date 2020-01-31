@@ -23,6 +23,12 @@ window.onload = function() {
       game.init();
     };
 
+    document.getElementById("next-level").onclick = function() {
+      document.getElementById("game-win").style.display = "none";
+      document.getElementById("game-board").style.display = "flex";
+      game.init2();
+    };
+
  
 
   
