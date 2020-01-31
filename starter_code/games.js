@@ -8,6 +8,7 @@ const game = {
     knowledge: 490,
     resilience: 500,
     code: [],
+    code2: [],
     lessFrustration: [],
     newupdate: [],
     warning: [],
@@ -76,16 +77,16 @@ const game = {
             this.soundGamePlay.play();
             this.framesCounter++;
             this.drawAll2();
-            this.moveAll();
-            this.generateCode();
-            this.clear();
+            this.moveAll2();
+            this.generateCode2();
+            this.clear2();
             this.generateLessFrustration();
             this.generateNewUpdate();
             this.generateWarning();
             this.isupdateplayercollision();
             this.isWarningAdvice();
-            this.isCodeCollision();
-            this.isCodeLose();
+            this.isCodeCollision2();
+            this.isCodeLose2();
             this.isLessFrustration();
             this.isFrustrationCollision();
             if (this.resilience <= 0) {
@@ -120,6 +121,7 @@ const game = {
         this.resilienceboard2 = new Resilienceboard2(this.ctx);
         this.player = new Player(this.ctx, this.keys, this.knowledge, this.resilience);
         this.code = [];
+        this.code2 = [];
         this.newupdate = [];
         this.warning = [];
         this.gameoverlogo = new Gameoverlogo(this.ctx);
@@ -127,6 +129,9 @@ const game = {
     },
 
     clear() {
+        this.ctx.clearRect(0, 0, this.lineWidth, this.height);
+    },
+    clear2() {
         this.ctx.clearRect(0, 0, this.lineWidth, this.height);
     },
 
@@ -146,7 +151,7 @@ const game = {
         this.knowledgeboard2.draw(this.knowledge);
         this.resilienceboard2.draw(this.resilience)
         this.player.draw();
-        this.code.forEach(code => code.draw());
+        this.code2.forEach(code => code.draw());
         this.lessFrustration.forEach(frus => frus.draw());
         this.newupdate.forEach(upd => upd.draw());
         this.warning.forEach(upd => upd.draw());
@@ -161,9 +166,22 @@ const game = {
 
     },
 
+    moveAll2() {
+        this.code2.forEach(code => code.move());
+        this.lessFrustration.forEach(frus => frus.move());
+        this.newupdate.forEach(upd => upd.move());
+        this.warning.forEach(upd => upd.move());
+
+    },
+
     generateCode() {
         if (this.framesCounter % 120 == 0) {
             this.code.push(new Code(this.ctx, Math.floor(Math.random() * 901)));
+        }
+    },
+    generateCode2() {
+        if (this.framesCounter % 120 == 0) {
+            this.code2.push(new Code2(this.ctx, Math.floor(Math.random() * 901)));
         }
     },
 
@@ -215,6 +233,27 @@ const game = {
                 }, 100);
             }
         });
+    },
+        isCodeCollision2() {
+            return this.code2.some(obs => {
+                if (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY) {
+                        this.knowledge += 2;
+                    
+    
+                    this.soundGotIt.play();
+    
+                    let posX = obs.posX;
+                    let posY = obs.posY;
+    
+                    this.boom = new Boom(this.ctx, posX, posY);
+                    this.boom.draw();
+    
+    
+                    setTimeout(() => {
+                        this.code2 = this.code2.filter(obs => obs.posX !== posX && obs.posY !== posY);
+                    }, 100);
+                }
+            });
 
     },
 
@@ -247,6 +286,16 @@ const game = {
 
     isCodeLose() {
         return this.code.forEach(obs => {
+            if (obs.posY > 800) {
+                this.resilience -= 10;
+                this.soundBlameIt.play();
+                this.flames = new Flames(this.ctx, obs.posX);
+                this.flames.draw();
+            }
+        });
+    },
+    isCodeLose2() {
+        return this.code2.forEach(obs => {
             if (obs.posY > 800) {
                 this.resilience -= 10;
                 this.soundBlameIt.play();
@@ -290,6 +339,12 @@ const game = {
 
     clear() {
         this.code = this.code.filter(obs => obs.posY < 825);
+        this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 825);
+        // this.newupdate = this.newupdate.filter(upd => upd.posX > 2100);
+
+    },
+    clear2() {
+        this.code2 = this.code2.filter(obs => obs.posY < 825);
         this.lessFrustration = this.lessFrustration.filter(frus => frus.posY < 825);
         // this.newupdate = this.newupdate.filter(upd => upd.posX > 2100);
 
