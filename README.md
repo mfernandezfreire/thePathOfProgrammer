@@ -8,8 +8,15 @@ Videojuego creado con canvas, javascript, HTML5 y CSS.
 
 # ¿Por qué cree "The Path of Programmer"?
 
-The path of programmer es mi primer proyecto cómo programador, en el solo se ven reflejadas dos semanas de teoría y una tercera de trabajo.
+The path of programmer es mi primer proyecto cómo programador.En el se ven reflejadas dos semanas de teoría, una tercera de trabajo y mucha ilusión por ver cómo en este corto periodo consigo hacer algo que nunca pense que lograria.
 
+## Historia
+
+En el juego "The path of programmer" te conviertes en el cerebro de un joven programador. 
+
+Tu viaje comenzará en una humilde habitación aprendiendo todo el código necesario para conseguir tu objetivo, llegar a IRONHACK!!.
+
+TEN CUIDADO!!. Nunca olvides que aprender el codigo es importante, pero deberas mantener tu RESILIENCIA a tope para poder lograr tu tarea.
 
 # Instrucciones
 
