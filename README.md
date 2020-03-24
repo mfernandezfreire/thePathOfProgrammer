@@ -22,9 +22,10 @@ Tu viaje comenzará en una humilde habitación aprendiendo todo el código neces
 
 TEN CUIDADO!!. Nunca olvides que aprender el codigo es importante, pero deberas mantener tu RESILIENCIA a tope para poder lograr tu tarea.
 
-![Code](https://res.cloudinary.com/dagreomkt/image/upload/v1585079616/Captura_de_pantalla_2020-03-24_a_las_20.53.21_tvvpoy.png "Code")
 
 ## Instrucciones para descargar y jugar al juego
+
+![Code](https://res.cloudinary.com/dagreomkt/image/upload/v1585079616/Captura_de_pantalla_2020-03-24_a_las_20.53.21_tvvpoy.png "Code")
 
 Si deseas descargarte el repositorio y jugar a "The Path Of Programmer" :
 
