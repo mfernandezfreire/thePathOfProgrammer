@@ -33,6 +33,6 @@ Teclea en tu terminal (omite el simbolo ‘$’)
 
 - `$ https://github.com/mfernandezfreire/thePathOfProgrammer.git`
 
-- Haz doble click sobre index.html o teclea en tu terminal `$ open index.html` en el terminal.
+- Haz doble click sobre index.html o teclea en tu terminal `$ open index.html`.
 
 - Disfruta del proyecto....
