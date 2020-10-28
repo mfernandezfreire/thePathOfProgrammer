@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+body {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-image: url('./images/Background.jpg');
+  background-size: cover;
+  align-items: center;
+  text-align: center;
+}
+
+#game-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin-left: 500px;
+}
+
+#instruction {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-left: 400px;
+}
+
+#game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1000px;
+  height: 900px;
+  margin-top: 50px;
+  /* margin-left: 100px; */
+}
+
+#game-win {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-top: 50px;
+}
+
+
+
+#game-lose {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 100%;
+  margin-top: 50px;
+}
+
+instruction-image {
+  width: 100px;
+  height: 800px;
+}
+
+.logo-img {
+  width: 100%;
+}
+
+
+
+.arrows-img {
+  width: 30%;
+}
+
+body button {
+  font-size: 30px;
+  background-color: #e5007e;
+  color: "white";
+  padding: 20px 40px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
